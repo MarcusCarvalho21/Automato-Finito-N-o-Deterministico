@@ -93,24 +93,102 @@ public class automat extends JComponent{
     
     public void criaAutomato(String cadeia){
          
-        Estado proximoEstado;
+        Estado estado = new Estado(false);
         
         for(int i = 0; i < cadeia.length(); i++){
+
+            Estado proximoEstado = new Estado(false);
+            
+            if(i == 0){
+                this.setEstadoInicial(estado);
+            }
             
             if(cadeia.charAt(i) == 'T'){
-                
-                Estado estado = new Estado();
-                
-                if(cadeia.charAt(i+1)=='*'){
-                    
-                    estado.setTransicoes(new Transicoes('0', estado));
-                    estado.setTransicoes(new Transicoes('1', estado));
-                    i++;
-                    
-                }else if(cadeia.charAt(i+1) == '+'){
-                    
-                    
-                    
+                if(i+1 < cadeia.length()){
+                    if(cadeia.charAt(i+1)=='*'){
+
+                        estado.setTransicoes(new Transicoes('0', estado));
+                        estado.setTransicoes(new Transicoes('1', estado));
+                        i++;
+
+                    }else if(cadeia.charAt(i+1) == '+'){
+
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+
+                        proximoEstado.setTransicoes(new Transicoes('0', proximoEstado));
+                        proximoEstado.setTransicoes(new Transicoes('1', proximoEstado));
+
+                        estado = proximoEstado;
+
+                        i++;
+                    }else if(cadeia.charAt(i+1) == '?'){
+
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+                        estado.setTransicoes(new Transicoes('e', proximoEstado));
+
+                        estado = proximoEstado;
+
+                        i++;
+                    }else{
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+                        estado = proximoEstado;
+                    }
+                }else{
+                    estado.setTransicoes(new Transicoes('0', proximoEstado));
+                    estado.setTransicoes(new Transicoes('1', proximoEstado));
+                    estado = proximoEstado;
+                    estado.setTerminal(true);
+                }
+            } else if(cadeia.charAt(i) == '1'){
+                if(i+1 < cadeia.length()){
+                    if(cadeia.charAt(i+1) == '*'){
+                        estado.setTransicoes(new Transicoes('1', estado));
+                        i++;
+                    }else if(cadeia.charAt(i+1) == '+'){
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+                        proximoEstado.setTransicoes(new Transicoes('1', proximoEstado));
+                        estado = proximoEstado;
+                        i++;
+                    }else if(cadeia.charAt(i+1) == '?'){
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+                        estado.setTransicoes(new Transicoes('e', proximoEstado));
+                        estado = proximoEstado;
+                        i++;
+                    }else{
+                        estado.setTransicoes(new Transicoes('1', proximoEstado));
+                        estado = proximoEstado;
+                    }
+                }else{
+                    estado.setTransicoes(new Transicoes('1', proximoEstado));
+                    estado = proximoEstado;
+                    estado.setTerminal(true);
+                }
+            } else if(cadeia.charAt(i) == '0'){
+                if(i+1 < cadeia.length()){
+                    if(cadeia.charAt(i+1) == '*'){
+                        estado.setTransicoes(new Transicoes('0', estado));
+                        i++;
+                    }else if(cadeia.charAt(i+1) == '+'){
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        proximoEstado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado = proximoEstado;
+                        i++;
+                    }else if(cadeia.charAt(i+1) == '?'){
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado.setTransicoes(new Transicoes('e', proximoEstado));
+                        estado = proximoEstado;
+                        i++;
+                    }else{
+                        estado.setTransicoes(new Transicoes('0', proximoEstado));
+                        estado = proximoEstado;
+                    }
+                }else{
+                    estado.setTransicoes(new Transicoes('0', proximoEstado));
+                    estado = proximoEstado;
+                    estado.setTerminal(true);
                 }
             }
         }

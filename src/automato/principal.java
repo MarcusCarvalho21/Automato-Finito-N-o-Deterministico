@@ -29,11 +29,15 @@ public class principal {
                 
 		automato.setEstadoInicial(estado0);
 		//System.out.println(automato.processaPalavra(""));
+                
+                automat segundoAutomato = new automat();
+                
+                segundoAutomato.criaAutomato("T*001*0+1?1");
 		
                 JFrame janela = new JFrame();
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                janela.getContentPane().add(automato);
-                janela.setSize(1080, 500);
+                janela.getContentPane().add(segundoAutomato);
+                janela.setSize(1800, 500);
                 janela.setVisible(true);
                 
 	}	

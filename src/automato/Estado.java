@@ -9,12 +9,13 @@ public class Estado {
     private ArrayList<Transicoes> transicoes;
     private boolean terminal = false;
     private int identificador;
-    static private int x = 0;
+    static public int x = 0;
     private boolean desenhado = false;
     private int y;
     
     public Estado(){
 	this.identificador = contador++;
+        this.terminal = false;
 	this.transicoes = new ArrayList<Transicoes>();
     }
     
@@ -69,7 +70,7 @@ public class Estado {
     
     public void desenhar(Graphics2D g){
 
-        g.drawOval(x, 0, 100, 100);
+        g.drawOval(x, 50, 100, 100);
         this.setDesenhado(true);
         x = x + 150;
         
@@ -77,6 +78,7 @@ public class Estado {
             
             if(!t.getProximoEstado().isDesenhado()){
                 t.getProximoEstado().desenhar((Graphics2D)g);
+                //t.getProximoEstado().setX(0);
             }  
         }    
     }
@@ -86,6 +88,7 @@ public class Estado {
         for(Transicoes t : this.getTransicoes()){
             if(t.getProximoEstado().isDesenhado()){
                 t.getProximoEstado().desmarcarTodos();   
+                t.getProximoEstado().setX(0);
             }
         }
     }
