@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class principal {
 	
 	public static void main(String args[]) {
-		
+		/*
 		Estado estado0 = new Estado(false);
 		Estado estado1 = new Estado(true);
                 Estado estado2 = new Estado(false);
@@ -29,10 +29,10 @@ public class principal {
                 
 		automato.setEstadoInicial(estado0);
 		//System.out.println(automato.processaPalavra(""));
-                
+                */
                 automat segundoAutomato = new automat();
                 
-                segundoAutomato.criaAutomato("T*001*0+1?1");
+                segundoAutomato.criaAutomato("1101");
 		
                 JFrame janela = new JFrame();
                 janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

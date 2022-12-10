@@ -71,6 +71,12 @@ public class Estado {
     public void desenhar(Graphics2D g){
 
         g.drawOval(x, 50, 100, 100);
+        g.drawString("q"+this.identificador, (x+1)+40, 105);
+        if(!this.terminal){
+            g.drawString(""+this.getTransicoes().get(0).getSimboloLido(), x+125, 95);
+            g.drawLine(x+150, 100, x+100, 100);
+        }
+
         this.setDesenhado(true);
         x = x + 150;
         
@@ -78,7 +84,7 @@ public class Estado {
             
             if(!t.getProximoEstado().isDesenhado()){
                 t.getProximoEstado().desenhar((Graphics2D)g);
-                //t.getProximoEstado().setX(0);
+                
             }  
         }    
     }
